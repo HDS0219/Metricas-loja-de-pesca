@@ -76,7 +76,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
         valor_total1 = (df1_filtrado['Vendas'] * df1_filtrado['Valor']).sum()
 
         st.write(f"**Relatório Final - Primeiro Mês**")
-        st.write(f"Quantidade total de itens filtrados ({filtro}): {quantidade_total1}")
+        st.write(f"Quantidade total de itens filtrados ({filtro}): {int(quantidade_total1)}")
         st.write(f"Valor total das vendas de itens filtrados: R${valor_total1:.2f}")
 
         # Relatório final para o segundo mês
@@ -84,11 +84,11 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
         valor_total2 = (df2_filtrado['Vendas'] * df2_filtrado['Valor']).sum()
 
         st.write(f"**Relatório Final - Segundo Mês**")
-        st.write(f"Quantidade total de itens filtrados ({filtro}): {quantidade_total2}")
+        st.write(f"Quantidade total de itens filtrados ({filtro}): {int(quantidade_total2)}")
         st.write(f"Valor total das vendas de itens filtrados: R${valor_total2:.2f}")
 
         # Resumo final comparativo
         if quantidade_total1 > quantidade_total2:
-            st.write(f"O Primeiro Mês teve mais vendas de {filtro}, com {quantidade_total1} itens vendidos.")
+            st.write(f"O Primeiro Mês teve mais vendas de {filtro}, com {int(quantidade_total1)} itens vendidos.")
         else:
-            st.write(f"O Segundo Mês teve mais vendas de {filtro}, com {quantidade_total2} itens vendidos.")
+            st.write(f"O Segundo Mês teve mais vendas de {filtro}, com {int(quantidade_total2)} itens vendidos.")
