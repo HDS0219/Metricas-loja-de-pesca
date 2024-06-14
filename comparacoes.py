@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure, ylabel, tight_layout, bar, gca, xticks, xlabel, subplots, barh, text, title
 from path_reader import getCaminhoPasta, padrao, getTabelas
 from dfs import armazenaDfs
 
@@ -40,13 +40,13 @@ def produtosMaisVendidos(df):
     print(top_10_itens)
 
     # Criando o gráfico de barras horizontal para os 10 itens mais rentáveis
-    graf = plt.figure(figsize=(12, 8))
-    plt.barh(top_10_itens['Nome Produto'], top_10_itens['Vendas'], color='skyblue')
-    plt.xlabel('número de vendas')
-    plt.ylabel('Nome Produto')
-    plt.title('10 itens mais vendidos no mês')
-    plt.gca().invert_yaxis()  # Inverte a ordem dos itens para que o mais vendido fique no topo
-    plt.tight_layout()  # Ajusta o layout para se adequar ao tamanho da figura
+    graf = figure(figsize=(12, 8))
+    barh(top_10_itens['Nome Produto'], top_10_itens['Vendas'], color='skyblue')
+    xlabel('número de vendas')
+    ylabel('Nome Produto')
+    title('10 itens mais vendidos no mês')
+    gca().invert_yaxis()  # Inverte a ordem dos itens para que o mais vendido fique no topo
+    tight_layout()  # Ajusta o layout para se adequar ao tamanho da figura
     st.pyplot(graf)
 
 def produtosMaisRentaveis(df):
@@ -66,13 +66,13 @@ def produtosMaisRentaveis(df):
     print(top_10_itens)
 
     # Criando o gráfico de barras horizontal para os 10 itens mais rentáveis
-    graf = plt.figure(figsize=(12, 8))
-    plt.barh(top_10_itens['Nome Produto'], top_10_itens['Valor'], color='skyblue')
-    plt.xlabel('Valor total com vendas')
-    plt.ylabel('Nome Produto')
-    plt.title('Itens mais rentáveis do mês')
-    plt.gca().invert_yaxis()  # Inverte a ordem dos itens para que o mais vendido fique no topo
-    plt.tight_layout()  # Ajusta o layout para se adequar ao tamanho da figura
+    graf = figure(figsize=(12, 8))
+    barh(top_10_itens['Nome Produto'], top_10_itens['Valor'], color='skyblue')
+    xlabel('Valor total com vendas')
+    ylabel('Nome Produto')
+    title('Itens mais rentáveis do mês')
+    gca().invert_yaxis()  # Inverte a ordem dos itens para que o mais vendido fique no topo
+    tight_layout()  # Ajusta o layout para se adequar ao tamanho da figura
     st.pyplot(graf)
 
 
@@ -127,19 +127,19 @@ def exibeVariacaoVenda(df1, df2):
     total_vendas['Aumento_Porcentagem'] = ((total_vendas['Valor_2'] - total_vendas['Valor_1']) / total_vendas['Valor_1']) * 100
     
     # Criar gráfico de barras com as porcentagens de aumento
-    graph = plt.figure(figsize=(10, 6))
-    bars = plt.bar(total_vendas['Classe'], total_vendas['Aumento_Porcentagem'], color='skyblue')
+    graph = figure(figsize=(10, 6))
+    bars = bar(total_vendas['Classe'], total_vendas['Aumento_Porcentagem'], color='skyblue')
     
     # Adicionar rótulos de porcentagem acima de cada barra
     for bar in bars:
         yval = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width()/2, yval, f'{yval:.2f}%', ha='center', va='bottom')
+        text(bar.get_x() + bar.get_width() / 2, yval, f'{yval:.2f}%', ha='center', va='bottom')
     
-    plt.xlabel('Classe')
-    plt.ylabel('Aumento em Porcentagem')
-    plt.title('Aumento em Porcentagem do Valor Total de Vendas por Classe (Janeiro para Fevereiro)')
-    plt.xticks(rotation=45)  # Rotaciona os rótulos do eixo x, se necessário
-    plt.tight_layout()  # Ajusta o layout para se adequar ao tamanho da figura
+    xlabel('Classe')
+    ylabel('Aumento em Porcentagem')
+    title('Aumento em Porcentagem do Valor Total de Vendas por Classe (Janeiro para Fevereiro)')
+    xticks(rotation=45)  # Rotaciona os rótulos do eixo x, se necessário
+    tight_layout()  # Ajusta o layout para se adequar ao tamanho da figura
     st.pyplot(graph)
 
 def exibeVariacaoValor(df1, df2):
@@ -164,7 +164,7 @@ def exibeVariacaoValor(df1, df2):
     total_vendas['Porcentagem_Fev'] = (total_vendas['Valor_2'] / total_vendas['Valor_2'].sum()) * 100
     
     # Configurar o gráfico de barras
-    fig, ax = plt.subplots(figsize=(12, 8))
+    fig, ax = subplots(figsize=(12, 8))
     
     # Definir a largura das barras
     bar_width = 0.35
@@ -185,10 +185,10 @@ def exibeVariacaoValor(df1, df2):
     ax.legend()
     
     # Rotacionar os rótulos do eixo x, se necessário
-    plt.xticks(rotation=45)
+    xticks(rotation=45)
     
     # Ajustar o layout para se adequar ao tamanho da figura
-    plt.tight_layout()
+    tight_layout()
     
     # Mostrar o gráfico
     st.pyplot(fig)
