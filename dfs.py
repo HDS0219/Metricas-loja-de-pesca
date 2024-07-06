@@ -3,10 +3,11 @@ import pandas as pd
 # Inicia um dataframe, utilizando o caminho específico da tabela escolhida:
 
 def iniciaDf(pasta, posicaoLista):
-
+    if pasta is None:
+        raise ValueError("O caminho para a pasta encontra-se nulo.")
+    
     df = pd.read_excel(pasta + "\\" + posicaoLista, engine="openpyxl")
     return df
-
 
 # Percorre os índices dentro de "tabelas", então chama a função "iniciaDf" para cada arquivo dentro da lista tabelas,
 # retornando uma nova lista com os dataframes de cada tabela.
