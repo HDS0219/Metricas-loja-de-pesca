@@ -16,24 +16,16 @@ padrao = r"C:\Users\*\Documents\tabelas"
 # Busca e retorna o caminho com o padrão fornecido.
 
 def getCaminhoPasta(caminho):
-
     # Procura caminhos que satisfaçam o padrão do argumento dado, e os armazena em uma lista:
-
     caminhosEncontrados = glob.glob(caminho)
 
-    # Verifica se lista tem algum caminho encontrado:
-
+    # Verifica se a lista tem algum caminho encontrado:
     if len(caminhosEncontrados) == 1:
-
         print("Um caminho correspondente foi encontrado.")
-
         caminhoTabelas = caminhosEncontrados[0]
         return caminhoTabelas
-
-
     else:
-        print("O caminho não foi encontrado ou existem mais de um caminho correspondente ao padrão. Crie uma e apenas "
-              "uma pasta 'tabela' na pasta 'Documents.'")
+        raise ValueError("O caminho não foi encontrado ou existem mais de um caminho correspondente ao padrão. Crie uma e apenas uma pasta 'tabela' na pasta 'Documents.'")
 
 
 # Utiliza o retorno de getCaminho para listar e retornar os itens de seu diretório.
