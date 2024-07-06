@@ -34,6 +34,10 @@ def getCaminhoPasta(caminho, caminho_padrao="caminho_padrao"):
 
 # Utiliza o retorno de getCaminho para listar e retornar os itens de seu diretório.
 
+
 def getTabelas(pasta):
+    if not pasta or not os.path.isdir(pasta):
+        raise ValueError(f"O caminho fornecido '{pasta}' não é um diretório válido.")
+    
     listaArquivos = os.listdir(pasta)
     return listaArquivos
